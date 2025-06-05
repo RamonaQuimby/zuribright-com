@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Chat with Zuri</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #fffef9;
+      padding: 20px;
+      max-width: 600px;
+      margin: auto;
+    }
+    h2 {
+      text-align: center;
+      color: #f57c00;
+    }
+    #welcome {
+      background-color: #fff3cd;
+      border-left: 6px solid #ffa000;
+      padding: 10px 15px;
+      margin-bottom: 20px;
+      border-radius: 6px;
+      animation: fadeIn 2s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    #chat-box {
+      border: 2px solid #ffcc80;
+      border-radius: 10px;
+      padding: 20px;
+      background-color: #fffde7;
+    }
+    #messages {
+      height: 300px;
+      overflow-y: auto;
+      border: 1px solid #ccc;
+      padding: 10px;
+      background-color: #ffffff;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+    input[type="text"] {
+      width: 100%;
+      padding: 12px;
+      font-size: 1em;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    .footer-button {
+      text-align: center;
+      margin-top: 30px;
+    }
+    .footer-button a {
+      background-color: #000;
+      color: #fff;
+      padding: 12px 24px;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+      display: inline-block;
+    }
+    .footer-button a:hover {
+      background-color: #333;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>💬 Ask Zuri Anything</h2>
+  <div id="welcome">
+    👋 Hi! I'm Zuri, your friendly guide. Ask me anything — I'm here to help!
+  </div>
+  <div id="chat-box">
+    <div id="messages"></div>
+    <input type="text" id="userInput" placeholder="Type your question here..." />
+  </div>
+
+  <div class="footer-button">
+    <a href="https://BlackEverything.com" target="_blank">Powered by BlackEverything.com</a>
+  </div>
+
+  <script>
+    async function sendMessage(message) {
+      const response = await fetch("https://zuribright-com.onrender.com/api/chat", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ message })
+      });
+
+      const data = await response.json();
+      return data.reply;
+    }
+
+    const input = document.getElementById("userInput");
+    const messages = document.getElementById("messages");
+
+    input.addEventListener("keypress", async function(e) {
+      if (e.key === "Enter" && input.value.trim() !== "") {
+        const userMessage = input.value.trim();
+        input.value = "";
+        messages.innerHTML += `<p><strong>You:</strong> ${userMessage}</p>`;
+        const reply = await sendMessage(userMessage);
+        messages.innerHTML += `<p><strong>Zuri:</strong> ${reply}</p>`;
+        messages.scrollTop = messages.scrollHeight;
+      }
+    });
+  </script>
+
+</body>
+</html>
