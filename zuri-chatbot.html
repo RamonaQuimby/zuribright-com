@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Zuri Chatbot</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #fef9f4;
+      padding: 30px;
+      max-width: 600px;
+      margin: auto;
+    }
+    h1 {
+      text-align: center;
+      color: #ff9900;
+    }
+    #chat-box {
+      border: 2px solid #ffcc66;
+      border-radius: 12px;
+      padding: 15px;
+      background-color: #fffbe6;
+    }
+    #messages {
+      height: 300px;
+      overflow-y: auto;
+      border: 1px solid #ddd;
+      padding: 10px;
+      background: white;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+    input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+  </style>
+</head>
+<body>
+  <h1>💬 Ask Zuri Anything!</h1>
+  <div id="chat-box">
+    <div id="messages"></div>
+    <input type="text" id="userInput" placeholder="Type your question here..." />
+  </div>
+  <script src="zuri-chat.js"></script>
+</body>
+</html>
