@@ -1,23 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Redirecting to Zuri Chatbot...</title>
-  <meta http-equiv="refresh" content="0; URL=zuri-chatbot.html" />
-  <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #fff8f0;
-      text-align: center;
-      padding: 100px;
-    }
-    h1 {
-      color: #ff9800;
-    }
-  </style>
-</head>
-<body>
-  <h1>👋 Redirecting to Zuri Chatbot...</h1>
-  <p>If you're not redirected, <a href="zuri-chatbot.html">click here</a>.</p>
-</body>
-</html>
+const express = require('express');
+const cors = require('cors');
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+app.use(cors());
+app.use(express.json());
+
+// ✅ Chatbot API endpoint
+app.post('/api/chat', async (req, res) => {
+  const userMessage = req.body.message;
+
+  if (!userMessage) {
+    return res.status(400).json({ reply: 'Please send a message.' });
+  }
+
+  // Placeholder response (you can replace this with AI logic)
+  const response = `You asked: "${userMessage}". Zuri says: That’s a great question! 🌟`;
+
+  res.json({ reply: response });
+});
+
+app.listen(PORT, () => {
+  console.log(`✅ Zuri Chatbot API running on port ${PORT}`);
+});
